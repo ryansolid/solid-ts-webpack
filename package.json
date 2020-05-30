@@ -1,0 +1,26 @@
+{
+  "name": "solid-ts-webpack",
+  "version": "0.0.1",
+  "description": "Really basic Solid webpack build with TS",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.10.1",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
+    "@babel/preset-typescript": "^7.10.1",
+    "babel-loader": "^8.1.0",
+    "babel-preset-solid": "^0.18.3",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "solid-js": "^0.18.3"
+  }
+}
