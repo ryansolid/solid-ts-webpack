@@ -27,7 +27,7 @@ const config = {
             babelrc: false,
             configFile: false,
             presets: ['@babel/preset-env', 'solid', '@babel/preset-typescript'],
-            plugins: ['@babel/plugin-syntax-dynamic-import', '@babel/plugin-proposal-class-properties', '@babel/proposal-object-rest-spread'],
+            plugins: ['solid-styled-jsx/babel', '@babel/plugin-syntax-dynamic-import', '@babel/plugin-proposal-class-properties', '@babel/proposal-object-rest-spread'],
           }
         }
       }

@@ -1,5 +1,6 @@
 import { render } from "solid-js/dom";
 import { CounterProvider, useCounter } from "./counter-store";
+import "solid-styled-jsx";
 
 const MiddleComponent = () => <NestedComponent />;
 
@@ -10,6 +11,11 @@ const NestedComponent = () => {
       <p>{counter.count}</p>
       <button onClick={increment}>+</button>
       <button onClick={decrement}>-</button>
+      <style jsx dynamic>{`
+        p {
+          color: ${counter.count > 10 ? "red" : "blue"};
+        }
+      `}</style>
     </>
   );
 };
