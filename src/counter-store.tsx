@@ -1,22 +1,22 @@
-import { createState, createContext, useContext, Component } from "solid-js";
+import { createSignal, createContext, useContext, Component, Accessor } from "solid-js";
 
 type CounterStore = [
-  { count: number },
+  Accessor<number>,
   { increment?: () => void; decrement?: () => void }
 ];
 
-const CounterContext = createContext<CounterStore>([{ count: 0 }, {}]);
+const CounterContext = createContext<CounterStore>([() => 0, {}]);
 
 export const CounterProvider: Component<{ count: number }> = props => {
-  const [state, setState] = createState({ count: props.count || 0 }),
+  const [count, setCount] = createSignal(props.count || 0),
     store: CounterStore = [
-      state,
+      count,
       {
         increment() {
-          setState("count", c => c + 1);
+          setCount(c => c + 1);
         },
         decrement() {
-          setState("count", c => c - 1);
+          setCount(c => c - 1);
         }
       }
     ];

@@ -1,13 +1,13 @@
-import { render } from "solid-js/dom";
+import { render } from "solid-js/web";
 import { CounterProvider, useCounter } from "./counter-store";
 
 const MiddleComponent = () => <NestedComponent />;
 
 const NestedComponent = () => {
-  const [counter, { increment, decrement }] = useCounter();
+  const [count, { increment, decrement }] = useCounter();
   return (
     <>
-      <p>{counter.count}</p>
+      <p>{count()}</p>
       <button onClick={increment}>+</button>
       <button onClick={decrement}>-</button>
     </>
