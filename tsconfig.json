@@ -12,6 +12,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "baseUrl": "./",
+    "paths": {
+      "@": ["./src/*"]
+    },
     "jsx": "preserve",
     "jsxImportSource": "solid-js"
   },
