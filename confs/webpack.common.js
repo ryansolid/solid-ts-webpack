@@ -46,7 +46,7 @@ const commonConf = {
                 }
             },
             {
-                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                test: /\.(woff2?|eot|[ot]tf)$/i,
                 type: 'asset/resource',
             },
         ],
