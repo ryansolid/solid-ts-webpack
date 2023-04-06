@@ -33,6 +33,7 @@ const commonConf = {
                 patterns: [
                     // use scss
                     path.resolve(__dirname, '../src/assets/scss/_globals.scss'),
+                    path.resolve(__dirname, '../src/assets/scss/_fonts.scss'),
                 ],
             }]),
             {
