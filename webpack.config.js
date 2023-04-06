@@ -1,16 +1,16 @@
 
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: './src/index.tsx',
+  entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist')
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    publicPath: '/'
+    static: path.join(__dirname, 'dist'),
+    port: 9111
   },
   mode: 'development',
   resolve: {
@@ -19,22 +19,23 @@ const config = {
   module: {
     rules: [
       {
-        test: /\.(ts)x?$/,
+        test: /\.[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             babelrc: false,
-            configFile: false,
-            presets: ['@babel/preset-env', 'solid', '@babel/preset-typescript'],
-            plugins: ['@babel/plugin-syntax-dynamic-import', '@babel/plugin-proposal-class-properties', '@babel/plugin-proposal-object-rest-spread'],
+            configFile: path.resolve(__dirname, 'babel.config.cjs'),
           }
         }
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public/index.htm'),
+      inject: 'body'
+    }),
   ]
 }
 

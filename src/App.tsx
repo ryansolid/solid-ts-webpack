@@ -1,0 +1,1 @@
+export default () => <div class="hello-world">Hello world</div>
