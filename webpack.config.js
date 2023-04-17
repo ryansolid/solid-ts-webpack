@@ -118,7 +118,7 @@ config
 config.when(isDev, configure => {
     configure.mode('development')
     // set devServer
-        .devServer
+    .devServer
         .port(8333)
         .hot(true)
         .end()
