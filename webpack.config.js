@@ -4,6 +4,7 @@ const Config = require('webpack-chain');
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const TerserPlugin = require("terser-webpack-plugin");
 
 // judge env
 const isDev = process.env.NODE_ENV.toLowerCase() === 'development';
@@ -109,9 +110,18 @@ config
         .use(HtmlWebpackPlugin, [
             {
                 template: path.resolve(__dirname, './public/index.htm'),
-                inject: 'body'
+                inject: 'body',
+                title: 'solid-ts-webpack-starter'
             }
         ])
+        .end();
+
+// split chunks
+config.optimization
+        .splitChunks({
+            chunks: 'all',
+            minSize: 15000,
+        })
         .end();
 
 // set in develoment mode
@@ -129,6 +139,51 @@ config.when(isDev, configure => {
                 devServer: true
             }
         ])
+        .end()
+        .devtool('source-map');
+});
+
+// set in production mode
+config.when(isProduction, configure => {
+    configure
+    .devtool('eval')
+    .optimization
+        .minimize(true)
+        .minimizer('terser')
+        .use(TerserPlugin, [{
+            test: /(\.[cm]?js(\?.*)?$)|(\.[jt]sx?$)/i,
+            extractComments: true,
+            terserOptions: {
+                compress: true,
+            },
+            minify(file, sourceMap) {
+                // https://github.com/mishoo/UglifyJS2#minify-options
+                const uglifyJsOptions = {
+                    /* your `uglify-js` package options */
+                    annotations: true,
+                    v8: true,
+                    compress: {
+                        drop_console: true,
+                        drop_debugger: true
+                    }
+                };
+
+                if (sourceMap) {
+                    uglifyJsOptions.sourceMap = {
+                        content: sourceMap,
+                    };
+                }
+
+                return require("uglify-js").minify(file, uglifyJsOptions);
+            }
+        }])
+        .end();
+
+    configure
+        .plugin('HtmlWebpackPlugin')
+        .tap(args => [...args, {
+            minify: true
+        }])
         .end();
 });
 
