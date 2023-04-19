@@ -129,6 +129,7 @@ config.when(isDev, configure => {
     configure.mode('development')
     // set devServer
     .devServer
+        .compress(true)
         .port(8333)
         .hot(true)
         .end()
@@ -151,9 +152,10 @@ config.when(isProduction, configure => {
         .minimize(true)
         .minimizer('terser')
         .use(TerserPlugin, [{
-            test: /(\.[cm]?js(\?.*)?$)|(\.[jt]sx?$)/i,
             extractComments: true,
+            minify: TerserPlugin.uglifyJsMinify,
             terserOptions: {
+                ecma: 5,
                 compress: {
                     drop_console: true,
                     drop_debugger: true
