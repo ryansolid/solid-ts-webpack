@@ -162,9 +162,9 @@ config.when(isProduction, configure => {
                 }
             },
         }])
-        .end();
-
-    configure
+        .end()
+    // html webpack plugin
+    .end()
         .plugin('HtmlWebpackPlugin')
         .tap(args => [...args, {
             minify: true
