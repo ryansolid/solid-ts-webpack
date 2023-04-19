@@ -154,28 +154,11 @@ config.when(isProduction, configure => {
             test: /(\.[cm]?js(\?.*)?$)|(\.[jt]sx?$)/i,
             extractComments: true,
             terserOptions: {
-                compress: true,
-            },
-            minify(file, sourceMap) {
-                // https://github.com/mishoo/UglifyJS2#minify-options
-                const uglifyJsOptions = {
-                    /* your `uglify-js` package options */
-                    annotations: true,
-                    v8: true,
-                    compress: {
-                        drop_console: true,
-                        drop_debugger: true
-                    }
-                };
-
-                if (sourceMap) {
-                    uglifyJsOptions.sourceMap = {
-                        content: sourceMap,
-                    };
+                compress: {
+                    drop_console: true,
+                    drop_debugger: true
                 }
-
-                return require("uglify-js").minify(file, uglifyJsOptions);
-            }
+            },
         }])
         .end();
 
