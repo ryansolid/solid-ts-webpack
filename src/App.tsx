@@ -16,5 +16,5 @@ export default () => {
             <p class="show">{count()}</p>
             <p class="memo">{doubleCount()}</p>
         </div>
-    )
+    );
 };
