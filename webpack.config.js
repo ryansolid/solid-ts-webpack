@@ -172,21 +172,7 @@ config.when(isProduction, configure => {
         ])
         .end();
 
-    configure.module
-        .rule("css")
-        .use("minify")
-        .loader(MiniCssExtractPlugin.loader)
-        .end()
-        .end()
-        .rule("sass")
-        .use("minify")
-        .loader(MiniCssExtractPlugin.loader)
-        .end()
-        .end()
-        .end()
-        .plugin("MiniCssExtractPlugin")
-        .use(MiniCssExtractPlugin)
-        .end();
+    configure.plugin("MiniCssExtractPlugin").use(MiniCssExtractPlugin).end();
 });
 
 module.exports = config.toConfig();
