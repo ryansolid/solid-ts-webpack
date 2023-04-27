@@ -6,6 +6,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { DefinePlugin } = require("webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
+const { loader: miniLoader } = MiniCssExtractPlugin;
 
 // judge env
 const isDev = process.env.NODE_ENV.toLowerCase() === "development";
@@ -51,8 +55,8 @@ config.module.rule("js").exclude.add(/node_modules/);
 config.module
     .rule("css")
     .test(/\.css$/i)
-    .use("style-loader")
-    .loader("style-loader")
+    .use(isDev ? "style-loader" : "mini-loader")
+    .loader(isDev ? "style-loader" : miniLoader)
     .end()
     .use("css-loader")
     .loader("css-loader")
@@ -64,8 +68,8 @@ config.module
     // set sass
     .rule("sass")
     .test(/\.s[ac]ss$/i)
-    .use("style-loader")
-    .loader("style-loader")
+    .use(isDev ? "style-loader" : "mini-loader")
+    .loader(isDev ? "style-loader" : miniLoader)
     .end()
     .use("css-loader")
     .loader("css-loader")
@@ -109,6 +113,13 @@ config
             template: path.resolve(__dirname, "./public/index.htm"),
             inject: "body",
             title: "solid-ts-webpack-starter",
+        },
+    ])
+    .end()
+    .plugin("DefinePlugin")
+    .use(DefinePlugin, [
+        {
+            "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
         },
     ])
     .end();
@@ -170,9 +181,17 @@ config.when(isProduction, configure => {
                 minify: true,
             },
         ])
+        .end()
+        .plugin("MiniCssExtractPlugin")
+        .use(MiniCssExtractPlugin, [
+            {
+                filename: "[name]-[contenthash].css",
+            },
+        ])
+        .end()
+        .plugin("cleanWebpackPlugin")
+        .use(CleanWebpackPlugin)
         .end();
-
-    configure.plugin("MiniCssExtractPlugin").use(MiniCssExtractPlugin).end();
 });
 
 module.exports = config.toConfig();
