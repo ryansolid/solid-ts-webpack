@@ -175,12 +175,15 @@ config.when(isProduction, configure => {
         // html webpack plugin
         .end()
         .plugin("HtmlWebpackPlugin")
-        .tap(args => [
-            ...args,
-            {
+        .tap(args => {
+            const [htmlPluginConf] = args;
+            const appendToConf = {
+                ...htmlPluginConf,
                 minify: true,
-            },
-        ])
+            };
+
+            return [appendToConf];
+        })
         .end()
         .plugin("MiniCssExtractPlugin")
         .use(MiniCssExtractPlugin, [
