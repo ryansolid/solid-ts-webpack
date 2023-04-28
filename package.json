@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Really basic Solid webpack build with TS",
   "scripts": {
-    "start": "webpack serve --open --node-env development",
+    "start": "cross-env NODE_ENV=development webpack serve --open",
     "build": "cross-env NODE_ENV=production webpack"
   },
   "license": "ISC",
