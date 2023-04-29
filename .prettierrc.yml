@@ -1,7 +1,7 @@
 printWidth: 120
 tabWidth: 4
 semi: true
-singleQuote: false
+singleQuote: true
 trailingComma: 'es5'
 bracketSameLine: false
 arrowParens: 'avoid'
