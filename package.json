@@ -5,7 +5,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --open",
     "build": "cross-env NODE_ENV=production webpack",
-    "formatter": "npx eslint ./src --fix"
+    "formatter": "npx eslint ./src --fix",
+    "formatter-style": "npx stylelint 'src/**/*{css,scss}' --fix"
   },
   "license": "ISC",
   "devDependencies": {
@@ -36,6 +37,10 @@
     "sass-loader": "^13.2.2",
     "style-loader": "^3.3.2",
     "style-resources-loader": "^1.5.0",
+    "stylelint": "^15.6.0",
+    "stylelint-config-standard": "^33.0.0",
+    "stylelint-config-standard-scss": "^9.0.0",
+    "stylelint-prettier": "^3.0.0",
     "typescript": "^5.0.3",
     "uglify-js": "^3.17.4",
     "webpack": "^5.78.0",
