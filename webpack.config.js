@@ -167,6 +167,7 @@ config.when(isDev, configure => {
 config.when(isProduction, configure => {
     configure
         .devtool('eval')
+        .mode('production')
         .optimization.minimize(true)
         .minimizer('terser')
         .use(TerserPlugin, [
