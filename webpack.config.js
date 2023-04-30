@@ -22,10 +22,10 @@ const config = new Config();
 config
     // set entry
     .entry('index')
-    .add(path.resolve(__dirname, './src/index.tsx'))
+    .add(path.resolve(__dirname, 'src/index.tsx'))
     .end()
     // output
-    .output.path(path.resolve(__dirname, './dist'))
+    .output.path(path.resolve(__dirname, 'dist'))
     .filename('[name].[contenthash].bundle.js')
     .end()
     // set alias
@@ -49,7 +49,7 @@ config.module
     .loader('babel-loader')
     .options({
         babelrc: false,
-        configFile: path.resolve(__dirname, './babel.config.cjs'),
+        configFile: path.resolve(__dirname, 'babel.config.cjs'),
     });
 config.module.rule('js').exclude.add(/node_modules/);
 
@@ -87,7 +87,7 @@ config.module
     .options({
         patterns: [
             // use scss
-            path.resolve(__dirname, './src/assets/scss/_globals.scss'),
+            path.resolve(__dirname, 'src/assets/scss/_globals.scss'),
         ],
     })
     .end()
@@ -112,7 +112,7 @@ config
     .plugin('HtmlWebpackPlugin')
     .use(HtmlWebpackPlugin, [
         {
-            template: path.resolve(__dirname, './public/index.htm'),
+            template: path.resolve(__dirname, 'public/index.htm'),
             inject: 'body',
             title: 'solid-ts-webpack-starter',
         },
