@@ -14,7 +14,7 @@
     "noEmit": true,
     "baseUrl": "./",
     "paths": {
-      "@": ["./src/*"]
+      "@/*": ["src/*"]
     },
     "jsx": "preserve",
     "jsxImportSource": "solid-js"

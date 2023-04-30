@@ -8,6 +8,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const { loader: miniLoader } = MiniCssExtractPlugin;
 
@@ -28,11 +29,12 @@ config
     .filename('[name].[contenthash].bundle.js')
     .end()
     // set alias
-    .resolve.alias.set('@', path.resolve(__dirname, './src'))
+    .resolve.alias.set('@', path.resolve(__dirname, 'src'))
     .end();
 
 // set extensions
-['.js', '.jsx', '.ts', '.tsx', '.json', '.mjs'].forEach(extension => {
+const extensions = ['.js', '.jsx', '.ts', '.tsx', '.json', '.mjs'];
+extensions.forEach(extension => {
     config.resolve.extensions.add(extension);
 });
 
@@ -135,6 +137,7 @@ config.optimization
 // set in develoment mode
 config.when(isDev, configure => {
     configure
+        .devtool('source-map')
         .mode('development')
         // set devServer
         .devServer.compress(true)
@@ -149,7 +152,15 @@ config.when(isDev, configure => {
             },
         ])
         .end()
-        .devtool('source-map');
+        .plugin('ESLintPlugin')
+        .use(ESLintPlugin, [
+            {
+                extensions,
+                fix: true,
+                threads: true,
+            },
+        ])
+        .end();
 });
 
 // set in production mode

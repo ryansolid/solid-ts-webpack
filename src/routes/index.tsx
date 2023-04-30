@@ -1,8 +1,8 @@
 import { lazy } from 'solid-js';
-import { Routes, Route, Navigate, useNavigate, useLocation } from '@solidjs/router';
+import { Routes, Route, Navigate } from '@solidjs/router';
 
-const Home = lazy(() => import('../views/HomePage'));
-const About = lazy(() => import('../views/AboutPage'));
+const Home = lazy(() => import('@/views/HomePage'));
+const About = lazy(() => import('@/views/AboutPage'));
 
 export default () => (
     <Routes>
