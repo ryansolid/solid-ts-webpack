@@ -210,6 +210,4 @@ config.when(isProduction, configure => {
         .end();
 });
 
-console.log(`${config}`);
-
 module.exports = config.toConfig();
