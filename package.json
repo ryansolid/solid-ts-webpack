@@ -5,8 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --open",
     "build": "cross-env NODE_ENV=production webpack",
-    "formatter": "npx eslint ./src --fix",
-    "formatter-style": "npx stylelint 'src/**/*{css,scss}' --fix"
+    "formatter": "npx eslint ./src --fix && npx stylelint 'src/**/*{css,scss}' --fix"
   },
   "license": "ISC",
   "devDependencies": {
