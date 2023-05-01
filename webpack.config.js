@@ -52,10 +52,10 @@ config.module
         configFile: path.resolve(__dirname, 'babel.config.cjs'),
     })
     .end()
-    .exclude.add(/node_modules/);
-
-// set styles
-config.module
+    .exclude.add(/node_modules/)
+    .end()
+    .end()
+    // set styles
     .rule('css')
     .test(/\.css$/i)
     .use(isDev ? 'style-loader' : 'mini-loader')
