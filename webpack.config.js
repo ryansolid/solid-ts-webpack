@@ -106,10 +106,9 @@ config.module
     .rule('fonts')
     .test(/\.(woff2?|eot|[ot]tf)$/i)
     .type('asset/resource')
-    .end();
-
-// set plugins
-config
+    .end()
+    .end()
+    // set plugins
     .plugin('HtmlWebpackPlugin')
     .use(HtmlWebpackPlugin, [
         {
@@ -125,89 +124,85 @@ config
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
         },
     ])
-    .end();
-
-// split chunks
-config.optimization
-    .splitChunks({
+    .end()
+    // split chunks
+    .optimization.splitChunks({
         chunks: 'all',
         minSize: 15000,
     })
-    .end();
-
-// set in develoment mode
-config.when(isDev, configure => {
-    configure
-        .devtool('source-map')
-        .mode('development')
-        // set devServer
-        .devServer.compress(true)
-        .port(8333)
-        .hot(true)
-        .end()
-        // check ts in dev environment
-        .plugin('ForkTsCheckerWebpackPlugin')
-        .use(ForkTsCheckerWebpackPlugin, [
-            {
-                devServer: true,
-            },
-        ])
-        .end()
-        .plugin('ESLintPlugin')
-        .use(ESLintPlugin, [
-            {
-                extensions,
-                fix: true,
-                threads: true,
-            },
-        ])
-        .end();
-});
-
-// set in production mode
-config.when(isProduction, configure => {
-    configure
-        .devtool('eval')
-        .mode('production')
-        .optimization.minimize(true)
-        .minimizer('terser')
-        .use(TerserPlugin, [
-            {
-                extractComments: true,
-                minify: TerserPlugin.uglifyJsMinify,
-                terserOptions: {
-                    ecma: 5,
-                    compress: {
-                        drop_console: true,
-                        drop_debugger: true,
+    .end()
+    // set in develoment mode
+    .when(isDev, configure => {
+        configure
+            .devtool('source-map')
+            .mode('development')
+            // set devServer
+            .devServer.compress(true)
+            .port(8333)
+            .hot(true)
+            .end()
+            // check ts in dev environment
+            .plugin('ForkTsCheckerWebpackPlugin')
+            .use(ForkTsCheckerWebpackPlugin, [
+                {
+                    devServer: true,
+                },
+            ])
+            .end()
+            .plugin('ESLintPlugin')
+            .use(ESLintPlugin, [
+                {
+                    extensions,
+                    fix: true,
+                    threads: true,
+                },
+            ])
+            .end();
+    })
+    // set in production mode
+    .when(isProduction, configure => {
+        configure
+            .devtool('eval')
+            .mode('production')
+            .optimization.minimize(true)
+            .minimizer('terser')
+            .use(TerserPlugin, [
+                {
+                    extractComments: true,
+                    minify: TerserPlugin.uglifyJsMinify,
+                    terserOptions: {
+                        ecma: 5,
+                        compress: {
+                            drop_console: true,
+                            drop_debugger: true,
+                        },
                     },
                 },
-            },
-        ])
-        .end()
-        // html webpack plugin
-        .end()
-        .plugin('HtmlWebpackPlugin')
-        .tap(args => {
-            const [htmlPluginConf] = args;
-            const appendToConf = {
-                ...htmlPluginConf,
-                minify: true,
-            };
+            ])
+            .end()
+            // html webpack plugin
+            .end()
+            .plugin('HtmlWebpackPlugin')
+            .tap(args => {
+                const [htmlPluginConf] = args;
+                const appendToConf = {
+                    ...htmlPluginConf,
+                    minify: true,
+                };
 
-            return [appendToConf];
-        })
-        .end()
-        .plugin('MiniCssExtractPlugin')
-        .use(MiniCssExtractPlugin, [
-            {
-                filename: '[name]-[contenthash].css',
-            },
-        ])
-        .end()
-        .plugin('cleanWebpackPlugin')
-        .use(CleanWebpackPlugin)
-        .end();
-});
+                return [appendToConf];
+            })
+            .end()
+            .plugin('MiniCssExtractPlugin')
+            .use(MiniCssExtractPlugin, [
+                {
+                    filename: '[name]-[contenthash].css',
+                },
+            ])
+            .end()
+            .plugin('cleanWebpackPlugin')
+            .use(CleanWebpackPlugin)
+            .end();
+    });
 
 module.exports = config.toConfig();
