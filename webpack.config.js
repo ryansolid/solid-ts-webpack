@@ -50,8 +50,9 @@ config.module
     .options({
         babelrc: false,
         configFile: path.resolve(__dirname, 'babel.config.cjs'),
-    });
-config.module.rule('js').exclude.add(/node_modules/);
+    })
+    .end()
+    .exclude.add(/node_modules/);
 
 // set styles
 config.module
@@ -208,5 +209,7 @@ config.when(isProduction, configure => {
         .use(CleanWebpackPlugin)
         .end();
 });
+
+console.log(`${config}`);
 
 module.exports = config.toConfig();
