@@ -140,6 +140,7 @@ config.module
             .devServer.compress(true)
             .port(8333)
             .hot(true)
+            .open(false)
             .end()
             // check ts in dev environment
             .plugin('ForkTsCheckerWebpackPlugin')
