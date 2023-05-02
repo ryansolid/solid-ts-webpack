@@ -17,9 +17,7 @@ const isDev = process.env.NODE_ENV.toLowerCase() === 'development';
 const isProduction = process.env.NODE_ENV.toLowerCase() === 'production';
 
 // start configuring
-const config = new Config();
-
-config
+const config = new Config()
     // set entry
     .entry('index')
     .add(path.resolve(__dirname, 'src/index.tsx'))
@@ -30,6 +28,7 @@ config
     .end()
     // set alias
     .resolve.alias.set('@', path.resolve(__dirname, 'src'))
+    .end()
     .end();
 
 // set extensions
