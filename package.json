@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Really basic Solid webpack build with TS",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack serve",
+    "start": "cross-env NODE_ENV=development webpack serve --no-live-reload",
     "build": "cross-env NODE_ENV=production webpack",
     "formatter": "npx eslint ./src --fix && npx stylelint 'src/**/*{css,scss}' --fix"
   },
@@ -35,6 +35,7 @@
     "prettier": "^2.8.8",
     "sass": "^1.60.0",
     "sass-loader": "^13.2.2",
+    "solid-refresh": "^0.5.2",
     "style-loader": "^3.3.2",
     "style-resources-loader": "^1.5.0",
     "stylelint": "^15.6.0",
