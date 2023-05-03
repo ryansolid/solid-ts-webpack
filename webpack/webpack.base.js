@@ -141,6 +141,7 @@ function useConfig(env = 'development') {
                     .port(8333)
                     .hot(true)
                     .open(false)
+                    .set('liveReload', false)
                     .end()
                     // check ts in dev environment
                     .plugin('ForkTsCheckerWebpackPlugin')
