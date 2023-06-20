@@ -14,10 +14,16 @@ const { loader: miniLoader } = MiniCssExtractPlugin;
 
 /**
  * Generate a basic config
- * @param {string} env NODE_ENV
+ * @param {Record<string, unknown>} options config options
  * @returns basic webpack conf
  */
-function useConfig(env = 'development') {
+function useConfig(
+    options = {
+        env: process.env.NODE_ENV,
+        title: 'solid-ts-webpack-starter',
+    }
+) {
+    const { env = process.env.NODE_ENV, title = 'solid-ts-webpack-starter' } = options;
     const isDev = env.toLowerCase() === 'development';
     const isProduction = env.toLowerCase() === 'production';
 
@@ -114,7 +120,7 @@ function useConfig(env = 'development') {
                 {
                     template: path.resolve(__dirname, '../public/index.htm'),
                     inject: 'body',
-                    title: 'solid-ts-webpack-starter',
+                    title,
                 },
             ])
             .end()
