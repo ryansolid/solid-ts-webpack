@@ -11,13 +11,16 @@ export default () => (
             path="/"
             element={<Navigate href="/home" />}
         />
-        <Route
-            path="/home"
-            component={Home}
-        />
-        <Route
-            path="/about"
-            component={About}
-        />
+
+        <Route path="/">
+            <Route
+                path="home"
+                component={Home}
+            />
+            <Route
+                path="about"
+                component={About}
+            />
+        </Route>
     </Routes>
 );
