@@ -1,3 +1,7 @@
+/**
+ * @description 路由守卫组件
+ */
+
 import { Navigate, Outlet } from '@solidjs/router';
 import { JSX } from 'solid-js';
 
