@@ -10,3 +10,7 @@
 
 * Use `webpack-chain` to rewrite the `webpack.config.js`;
 * Install `@solidjs/router`;
+
+## Upgraded (I have forgot the time ...)
+
+* add `eslint`, `stylelint`, `prettier` and gave really basic configs
