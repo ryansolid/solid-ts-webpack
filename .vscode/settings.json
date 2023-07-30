@@ -1,6 +1,10 @@
 {
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true
     },
-    "eslint.enable": true
+    "eslint.enable": true,
+    "stylelint.enable": true,
+    "stylelint.configFile": ".stylelintrc.cjs",
+    "scss.validate": true
 }
