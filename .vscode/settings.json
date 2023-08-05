@@ -6,5 +6,6 @@
     "eslint.enable": true,
     "stylelint.enable": true,
     "stylelint.configFile": ".stylelintrc.cjs",
+    "stylelint.validate": ["scss"],
     "scss.validate": true
 }
