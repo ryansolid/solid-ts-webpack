@@ -36,6 +36,7 @@ function useConfig(
             // output
             .output.path(path.resolve(__dirname, '../dist'))
             .filename('[name].[contenthash].bundle.js')
+            .publicPath('/')
             .end()
             // set alias
             .resolve.alias.set('@', path.resolve(__dirname, '../src'))
@@ -120,6 +121,7 @@ function useConfig(
                 {
                     template: path.resolve(__dirname, '../html/index.htm'),
                     inject: 'body',
+                    favicon: path.resolve(__dirname, '../html/favicon-solid.png'),
                     title,
                 },
             ])
@@ -193,12 +195,13 @@ function useConfig(
                     .plugin('HtmlWebpackPlugin')
                     .tap(args => {
                         const [htmlPluginConf] = args;
-                        const appendToConf = {
-                            ...htmlPluginConf,
-                            minify: true,
-                        };
 
-                        return [appendToConf];
+                        return [
+                            {
+                                ...htmlPluginConf,
+                                minify: true,
+                            },
+                        ];
                     })
                     .end()
                     .plugin('MiniCssExtractPlugin')
