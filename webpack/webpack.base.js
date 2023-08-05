@@ -118,7 +118,7 @@ function useConfig(
             .plugin('HtmlWebpackPlugin')
             .use(HtmlWebpackPlugin, [
                 {
-                    template: path.resolve(__dirname, '../public/index.htm'),
+                    template: path.resolve(__dirname, '../html/index.htm'),
                     inject: 'body',
                     title,
                 },
