@@ -15,6 +15,10 @@
 
 * add `eslint`, `stylelint`, `prettier` and gave really basic configs
 
-## Upgraded ad June 30th, 2023 (UTC + 8)
+## Upgraded at June 30th, 2023 (UTC + 8)
 
 * Add `stylelint` config to `.vscode/settings.json`
+
+## Upgraded at August 5th, 2023 (UTC + 8)
+
+* Add favicon
