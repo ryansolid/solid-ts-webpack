@@ -22,3 +22,7 @@
 ## Upgraded at August 5th, 2023 (UTC + 8)
 
 * Add favicon
+
+## Upgraded at August 12th, 2023 (UTC + 8)
+
+* Add `css module` support
