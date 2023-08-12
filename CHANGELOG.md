@@ -26,3 +26,8 @@
 ## Upgraded at August 12th, 2023 (UTC + 8)
 
 * Add `css module` support
+
+## Upgraded at August 13th, 2023 (UTC + 8)
+
+* Upgrade `prettier` to `3.0`
+* Add `eslint-plugin-solid`
