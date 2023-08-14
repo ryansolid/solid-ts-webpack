@@ -31,3 +31,7 @@
 
 * Upgrade `prettier` to `3.0`
 * Add `eslint-plugin-solid`
+
+## Upgraded at August 14th, 2023 (UTC + 8)
+
+* Change package manager from `npm` to `pnpm`
