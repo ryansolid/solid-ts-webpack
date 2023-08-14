@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production webpack",
     "formatter": "npx eslint ./src --fix && npx stylelint 'src/**/*{css,scss}' --fix"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.22.10",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
