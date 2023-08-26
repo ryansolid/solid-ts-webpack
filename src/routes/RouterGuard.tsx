@@ -3,7 +3,6 @@
  */
 
 import { Navigate, Outlet } from '@solidjs/router';
-import { JSX } from 'solid-js';
 
 interface GuardedRouteProps {
     /**
@@ -18,6 +17,13 @@ interface GuardedRouteProps {
     redirectRoute?: string;
 }
 
-export default function (props: GuardedRouteProps): JSX.Element {
+/**
+ * 路由守卫
+ * @param props 路由守卫属性
+ * @returns 元素
+ */
+const RouteGuard = (props: GuardedRouteProps) => {
     return <>{props.isRouteAccessible ? <Outlet /> : <Navigate href={props.redirectRoute as string} />}</>;
-}
+};
+
+export default RouteGuard;
