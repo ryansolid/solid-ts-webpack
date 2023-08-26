@@ -19,6 +19,5 @@ interface GuardedRouteProps {
 }
 
 export default function (props: GuardedRouteProps): JSX.Element {
-    const { isRouteAccessible, redirectRoute = '' } = props;
-    return isRouteAccessible ? <Outlet /> : <Navigate href={redirectRoute} />;
+    return <>{props.isRouteAccessible ? <Outlet /> : <Navigate href={props.redirectRoute as string} />}</>;
 }
