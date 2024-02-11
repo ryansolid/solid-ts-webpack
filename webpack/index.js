@@ -1,5 +1,7 @@
 const path = require('path');
 const Config = require('webpack-chain');
+const compose = require('compose-function');
+const { loadStyles } = require('./modules/LoadStyles.js');
 
 // plugins
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,19 +12,52 @@ const { DefinePlugin } = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
-const { loader: miniLoader } = MiniCssExtractPlugin;
-
 /**
  * Generate a basic config
  * @param {Record<string, unknown>} options config options
  * @returns basic webpack conf
  */
-function useConfig(options = {}) {
-    const { env = process.env.NODE_ENV, title = 'solid-ts-webpack-starter', lang = 'en' } = options;
-    const isDev = env.toLowerCase() === 'development';
-    const isProduction = env.toLowerCase() === 'production';
+const createBasicConfig = (options = {}) => {
+    const {
+        /** HTML Title */
+        title = 'react-ts-webpack-starter',
+        /** HTML language */
+        lang = 'en',
+        /** for development conf */
+        isDev = true,
+        /** for production conf */
+        isProd = false,
+    } = options || {};
 
-    return (
+    const configLoadStyle = compose(
+        /** @param {Config} conf config */
+        conf =>
+            loadStyles(conf, {
+                isDev,
+                styleType: 'sass',
+            }),
+
+        /** @param {Config} conf config */
+        conf =>
+            loadStyles(conf, {
+                isDev,
+                styleType: 'scss',
+                styleResourcePatterns: [
+                    // use scss
+                    path.resolve(__dirname, '../src/assets/scss/_globals.scss'),
+                ],
+            }),
+
+        /** @param {Config} conf config */
+        conf =>
+            loadStyles(conf, {
+                isDev,
+                styleType: 'css',
+                isCssModules: false,
+            })
+    );
+
+    return configLoadStyle(
         new Config()
             // set entry
             .entry('index')
@@ -49,50 +84,9 @@ function useConfig(options = {}) {
             .test(/\.[jt]sx?$/i)
             .use('babel')
             .loader('babel-loader')
-            .options({
-                babelrc: false,
-                configFile: path.resolve(__dirname, '../babel.config.cjs'),
-            })
+            .options({ babelrc: true })
             .end()
             .exclude.add(/node_modules/)
-            .end()
-            .end()
-            // set styles
-            .rule('css')
-            .test(/\.css$/i)
-            .use(isDev ? 'style-loader' : 'mini-loader')
-            .loader(isDev ? 'style-loader' : miniLoader)
-            .end()
-            .use('css-loader')
-            .loader('css-loader')
-            .end()
-            .use('postcss-loader')
-            .loader('postcss-loader')
-            .end()
-            .end()
-            // set sass
-            .rule('sass')
-            .test(/\.s[ac]ss$/i)
-            .use(isDev ? 'style-loader' : 'mini-loader')
-            .loader(isDev ? 'style-loader' : miniLoader)
-            .end()
-            .use('css-loader')
-            .loader('css-loader')
-            .end()
-            .use('postcss-loader')
-            .loader('postcss-loader')
-            .end()
-            .use('sass-loader')
-            .loader('sass-loader')
-            .end()
-            .use('style-resource')
-            .loader('style-resources-loader')
-            .options({
-                patterns: [
-                    // use scss
-                    path.resolve(__dirname, '../src/assets/scss/_globals.scss'),
-                ],
-            })
             .end()
             .end()
             // add pics
@@ -127,7 +121,8 @@ function useConfig(options = {}) {
             .plugin('DefinePlugin')
             .use(DefinePlugin, [
                 {
-                    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+                    isDev,
+                    isProd,
                 },
             ])
             .end()
@@ -137,14 +132,14 @@ function useConfig(options = {}) {
                 minSize: 15000,
             })
             .end()
-            // set in develoment mode
+            // set in development mode
             .when(isDev, configure => {
                 configure
                     .devtool('source-map')
                     .mode('development')
                     // set devServer
                     .devServer.compress(true)
-                    .port(8333)
+                    .port(9222)
                     .hot(true)
                     .open(false)
                     .set('liveReload', false)
@@ -168,7 +163,7 @@ function useConfig(options = {}) {
                     .end();
             })
             // set in production mode
-            .when(isProduction, configure => {
+            .when(isProd, configure => {
                 configure
                     .devtool('eval')
                     .mode('production')
@@ -191,16 +186,12 @@ function useConfig(options = {}) {
                     // html webpack plugin
                     .end()
                     .plugin('HtmlWebpackPlugin')
-                    .tap(args => {
-                        const [htmlPluginConf] = args;
-
-                        return [
-                            {
-                                ...htmlPluginConf,
-                                minify: true,
-                            },
-                        ];
-                    })
+                    .tap(args => [
+                        ...args,
+                        {
+                            minify: true,
+                        },
+                    ])
                     .end()
                     .plugin('MiniCssExtractPlugin')
                     .use(MiniCssExtractPlugin, [
@@ -214,8 +205,8 @@ function useConfig(options = {}) {
                     .end();
             })
     );
-}
+};
 
 module.exports = {
-    useConfig,
+    createBasicConfig,
 };

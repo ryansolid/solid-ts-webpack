@@ -1,25 +1,20 @@
 import { A } from '@solidjs/router';
-import './_style.scss';
+import styles from './_style.module.scss';
 
 export default () => {
     return (
-        <div class="hello-world">
-            <nav class="hello-world-navi-bar">
+        <div class={styles['hello-world']}>
+            <nav class={styles['hello-world-navi-bar']}>
                 <A
                     classList={{
                         'home-nav': true,
                         'navi-item': true,
                     }}
-                    href="/"
-                    activeClass="underlined" // 👈 Add the active class
+                    href="/" // 👈 Add the active class
                 >
                     Home
                 </A>
                 <A
-                    classList={{
-                        'about-nav': true,
-                        'navi-item': true,
-                    }}
                     href="/about"
                     activeClass="underlined" // 👈 Add the active class
                 >
@@ -27,7 +22,7 @@ export default () => {
                 </A>
             </nav>
 
-            <h1 class="hello-world-welcome">Welcome to Your Solid.js + TypeScript App</h1>
+            <h1 class={styles['hello-world-welcome']}>Welcome to Your Solid.js + TypeScript App</h1>
         </div>
     );
 };

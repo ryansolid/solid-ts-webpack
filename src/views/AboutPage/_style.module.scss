@@ -1,0 +1,11 @@
+/* stylelint-disable-next-line selector-class-pattern */
+.aboutPage {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &Text {
+        color: #2c3e50;
+    }
+}
