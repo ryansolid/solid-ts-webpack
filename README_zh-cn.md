@@ -7,6 +7,14 @@
 * `sass`
 * `TypeScript @^5.0.0`
 
-更具体的配置可从[Webpack配置文件](./webpack/webpack.base.js)查看。
+更具体的配置可从[Webpack配置文件](./webpack/webpack.base.js)查看, 但不建议直接修改! 
 
-需要使用的时候Fork本项目即可！
+复制为模板:
+
+```sh
+# npm
+$ npx degit https://github.com/Allen-Bayern/solid-ts-webpack5.git YOUR_PROJECT
+
+# pnpm
+$ pnpm dlx degit https://github.com/Allen-Bayern/solid-ts-webpack5.git YOUR_PROJECT
+```
