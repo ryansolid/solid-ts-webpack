@@ -15,7 +15,8 @@ const loadStyles = (
         return confInstance.module
             .rule('sass')
             .test(/\.sass$/i)
-            .oneOf('normal')
+            .oneOf('css-modules')
+            .test(/\.module\.\w+$/i)
             .use('style')
             .loader(isDev ? 'style-loader' : miniLoader)
             .end()
@@ -25,12 +26,10 @@ const loadStyles = (
                 sourceMap,
                 importLoaders: 2,
                 // css-module hash
-                modules: isCssModules
-                    ? {
-                          auto: resourcePath => resourcePath.endsWith('.sass'),
-                          localIdentName: '[local]__[hash:base64]',
-                      }
-                    : false,
+                modules: {
+                    auto: resourcePath => resourcePath.endsWith('.sass'),
+                    localIdentName: '[local]__[hash:base64]',
+                },
             })
             .end()
             .use('postcss')
@@ -53,8 +52,7 @@ const loadStyles = (
             })
             .end()
             .end()
-            .oneOf('css-modules')
-            .test(/\.module\.\w+$/i)
+            .oneOf('css-normal')
             .use('style')
             .loader(isDev ? 'style-loader' : miniLoader)
             .end()
@@ -64,12 +62,7 @@ const loadStyles = (
                 sourceMap,
                 importLoaders: 2,
                 // css-module hash
-                modules: isCssModules
-                    ? {
-                          auto: resourcePath => resourcePath.endsWith('.sass'),
-                          localIdentName: '[local]__[hash:base64]',
-                      }
-                    : false,
+                modules: false,
             })
             .end()
             .use('postcss')
@@ -100,7 +93,8 @@ const loadStyles = (
         return confInstance.module
             .rule('scss')
             .test(/\.scss$/i)
-            .oneOf('normal')
+            .oneOf('css-module')
+            .test(/\.module\.\w+$/i)
             .use('style')
             .loader(isDev ? 'style-loader' : miniLoader)
             .end()
@@ -110,12 +104,10 @@ const loadStyles = (
                 sourceMap,
                 importLoaders: 2,
                 // css-module hash
-                modules: isCssModules
-                    ? {
-                          auto: resourcePath => resourcePath.endsWith('.scss'),
-                          localIdentName: '[local]__[hash:base64]',
-                      }
-                    : false,
+                modules: {
+                    auto: resourcePath => resourcePath.endsWith('.scss'),
+                    localIdentName: '[local]__[hash:base64]',
+                },
             })
             .end()
             .use('postcss')
@@ -134,7 +126,6 @@ const loadStyles = (
             .end()
             .end()
             .oneOf('css-modules')
-            .test(/\.module\.\w+$/i)
             .use('style')
             .loader(isDev ? 'style-loader' : miniLoader)
             .end()
@@ -144,12 +135,7 @@ const loadStyles = (
                 sourceMap,
                 importLoaders: 2,
                 // css-module hash
-                modules: isCssModules
-                    ? {
-                          auto: resourcePath => resourcePath.endsWith('.scss'),
-                          localIdentName: '[local]__[hash:base64]',
-                      }
-                    : false,
+                modules: false,
             })
             .end()
             .use('postcss')
@@ -175,7 +161,8 @@ const loadStyles = (
         return confInstance.module
             .rule('less')
             .test(/\.less$/i)
-            .oneOf('normal')
+            .oneOf('css-modules')
+            .test(/\.module\.\w+$/i)
             .use('style')
             .loader(isDev ? 'style-loader' : miniLoader)
             .end()
@@ -185,12 +172,10 @@ const loadStyles = (
                 sourceMap,
                 importLoaders: 2,
                 // css-module hash
-                modules: isCssModules
-                    ? {
-                          auto: resourcePath => resourcePath.endsWith('.less'),
-                          localIdentName: '[local]__[hash:base64]',
-                      }
-                    : false,
+                modules: {
+                    auto: resourcePath => resourcePath.endsWith('.less'),
+                    localIdentName: '[local]__[hash:base64]',
+                },
             })
             .end()
             .use('postcss')
@@ -209,7 +194,6 @@ const loadStyles = (
             .end()
             .end()
             .oneOf('css-modules')
-            .test(/\.module\.\w+$/i)
             .use('style')
             .loader(isDev ? 'style-loader' : miniLoader)
             .end()
@@ -219,12 +203,7 @@ const loadStyles = (
                 sourceMap,
                 importLoaders: 2,
                 // css-module hash
-                modules: isCssModules
-                    ? {
-                          auto: resourcePath => resourcePath.endsWith('.less'),
-                          localIdentName: '[local]__[hash:base64]',
-                      }
-                    : false,
+                modules: false,
             })
             .end()
             .use('postcss')
@@ -250,7 +229,8 @@ const loadStyles = (
         return confInstance.module
             .rule('stylus')
             .test(/\.styl(us)?$/i)
-            .oneOf('normal')
+            .oneOf('css-modules')
+            .test(/\.module\.\w+$/i)
             .use('style')
             .loader(isDev ? 'style-loader' : miniLoader)
             .end()
@@ -260,12 +240,10 @@ const loadStyles = (
                 sourceMap,
                 importLoaders: 2,
                 // css-module hash
-                modules: isCssModules
-                    ? {
-                          auto: resourcePath => resourcePath.endsWith('.styl') || resourcePath.endsWith('.stylus'),
-                          localIdentName: '[local]__[hash:base64]',
-                      }
-                    : false,
+                modules: {
+                    auto: resourcePath => resourcePath.endsWith('.styl') || resourcePath.endsWith('.stylus'),
+                    localIdentName: '[local]__[hash:base64]',
+                },
             })
             .end()
             .use('postcss')
@@ -283,8 +261,7 @@ const loadStyles = (
             })
             .end()
             .end()
-            .oneOf('css-modules')
-            .test(/\.module\.\w+$/i)
+            .oneOf('normal')
             .use('style')
             .loader(isDev ? 'style-loader' : miniLoader)
             .end()
@@ -294,12 +271,7 @@ const loadStyles = (
                 sourceMap,
                 importLoaders: 2,
                 // css-module hash
-                modules: isCssModules
-                    ? {
-                          auto: resourcePath => resourcePath.endsWith('.styl') || resourcePath.endsWith('.stylus'),
-                          localIdentName: '[local]__[hash:base64]',
-                      }
-                    : false,
+                modules: false,
             })
             .end()
             .use('postcss')
@@ -322,9 +294,10 @@ const loadStyles = (
     }
 
     return confInstance.module
-        .rule('stylus')
+        .rule('css')
         .test(/\.css$/i)
-        .oneOf('normal')
+        .oneOf('css-module')
+        .test(/\.module\.\w+$/i)
         .use('style')
         .loader(isDev ? 'style-loader' : miniLoader)
         .end()
@@ -334,12 +307,10 @@ const loadStyles = (
             sourceMap,
             importLoaders: 1,
             // css-module hash
-            modules: isCssModules
-                ? {
-                      auto: resourcePath => resourcePath.endsWith('.css'),
-                      localIdentName: '[local]__[hash:base64]',
-                  }
-                : false,
+            modules: {
+                auto: resourcePath => resourcePath.endsWith('.css'),
+                localIdentName: '[local]__[hash:base64]',
+            },
         })
         .end()
         .use('postcss')
@@ -354,7 +325,6 @@ const loadStyles = (
         .end()
         .end()
         .oneOf('css-modules')
-        .test(/\.module\.\w+$/i)
         .use('style')
         .loader(isDev ? 'style-loader' : miniLoader)
         .end()
@@ -364,12 +334,7 @@ const loadStyles = (
             sourceMap,
             importLoaders: 1,
             // css-module hash
-            modules: isCssModules
-                ? {
-                      auto: resourcePath => resourcePath.endsWith('.css'),
-                      localIdentName: '[local]__[hash:base64]',
-                  }
-                : false,
+            modules: false,
         })
         .end()
         .use('postcss')
