@@ -11,7 +11,6 @@ module.exports = {
         '@babel/preset-typescript',
     ],
     plugins: [
-        '@babel/plugin-proposal-object-rest-spread',
         [
             'solid-refresh/babel',
             {
