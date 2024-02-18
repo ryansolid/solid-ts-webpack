@@ -13,8 +13,8 @@
 
 ```sh
 # npm
-$ npx degit https://github.com/Allen-Bayern/solid-ts-webpack5.git YOUR_PROJECT
+$ npx degit https://github.com/My-Project-Template/solid-ts-webpack5.git YOUR_PROJECT
 
 # pnpm
-$ pnpm dlx degit https://github.com/Allen-Bayern/solid-ts-webpack5.git YOUR_PROJECT
+$ pnpm dlx degit https://github.com/My-Project-Template/solid-ts-webpack5.git YOUR_PROJECT
 ```
