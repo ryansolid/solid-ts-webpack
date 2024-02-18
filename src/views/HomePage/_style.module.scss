@@ -1,0 +1,27 @@
+.hello-world {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-navi-bar {
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .navi-item {
+            padding: 0 12px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        .underlined {
+            color: #42b983;
+        }
+    }
+
+    &-welcome {
+        color: #2c3e50;
+    }
+}
